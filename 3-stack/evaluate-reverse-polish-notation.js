@@ -7,12 +7,12 @@ var evalRPN = function (tokens) {
     "+": (a, b) => a + b,
     "-": (a, b) => a - b,
     "*": (a, b) => a * b,
-    "/": (a, b) => a / b,
+    "/": (a, b) => Math.floor(a / b),
   };
   const operandsStack = [];
   let computation = null;
 
-  for (let token of operandsStack) {
+  for (let token of tokens) {
     if (isNaN(Number(token))) {
       const b = operandsStack.pop();
       if (computation === null) {
