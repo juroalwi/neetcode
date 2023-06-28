@@ -7,20 +7,21 @@ var evalRPN = function (tokens) {
     "+": (a, b) => a + b,
     "-": (a, b) => a - b,
     "*": (a, b) => a * b,
-    "/": (a, b) => Math.floor(a / b),
+    "/": (a, b) =>
+      (a < 0 && b < 0) || (a > 0 && b > 0)
+        ? Math.floor(a / b)
+        : Math.ceil(a / b),
   };
   const operandsStack = [];
-  let computation = null;
 
   for (let token of tokens) {
     if (isNaN(Number(token))) {
       const b = operandsStack.pop();
-      if (computation === null) {
-        const a = operandsStack.pop();
-        computation = operations[token](a, b);
-      } else computation = operations[token](computation, b);
+      const a = operandsStack.pop();
+      const computation = operations[token](a, b);
+      operandsStack.push(computation);
     } else operandsStack.push(Number(token));
   }
 
-  return computation;
+  return operandsStack.pop();
 };
