@@ -19,8 +19,15 @@
  */
 
 const productExceptSelf = (nums) => {
-  const product = nums.reduce((curr, el) => curr * el);
-  return nums.map((num) => product / num);
+  const partialProducts = [...new Array(nums.length)].map(() => [1, 1]);
+
+  for (let l = 1; l < nums.length; l++) {
+    const r = nums.length - l - 1;
+    partialProducts[l][0] = partialProducts[l - 1][0] * nums[l - 1];
+    partialProducts[r][1] = partialProducts[r + 1][1] * nums[r + 1];
+  }
+
+  return partialProducts.map((el) => el[0] * el[1]);
 };
 
-console.log(productExceptSelf([-1,0,1,2,3]));
+console.log(productExceptSelf([-1, 0, 1, 2, 3]));
