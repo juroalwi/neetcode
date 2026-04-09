@@ -13,22 +13,6 @@ function isAnagram(s, t) {
   return true;
 }
 
-// function isAnagram(s, t) {
-//   for (let i = 0; i < t.length; i++) {
-//     let coincidence = false;
-//     for (let j = 0; j < s.length; j++) {
-//       if (t[i] === s[j] && !coincidence) {
-//         coincidence = true;
-//         s = s.substring(0, j) + s.substring(j + 1, s.length);
-//         console.log(i, t);
-//         console.log(j, s);
-//       }
-//     }
-//     if (!coincidence) return false;
-//   }
-//   return true;
-// }
-//
 s = "anagram";
 t = "nagaram";
 console.log(isAnagram(s, t));
