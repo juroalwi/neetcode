@@ -10,9 +10,13 @@ function isAnagram(s, t) {
     if (!charStock[t[i]] || charStock[t[i]] === 0) return false;
     else charStock[t[i]]--;
   }
+
+  for (let char in charStock) {
+    if (charStock[char] > 0) return false;
+  }
+
   return true;
 }
 
-s = "anagram";
-t = "nagaram";
-console.log(isAnagram(s, t));
+console.log(isAnagram("anagram", "nagaram"));
+console.log(isAnagram("XX", "X"));
