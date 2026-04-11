@@ -38,11 +38,11 @@ const longestConsecutive = (nums) => {
 
     let interrupted = false;
     for (let i = 0; i < flags.length; i++) {
-      if (!flags[i] && !interrupted) {
-        if (i > maxLength) {
-          maxLength = i;
-        }
+      if (!interrupted && !flags[i]) {
         interrupted = true;
+      }
+      if (!interrupted && i + 1 > maxLength) {
+        maxLength = i + 1;
       }
       flags[i] = 0;
     }
@@ -51,4 +51,4 @@ const longestConsecutive = (nums) => {
   return maxLength;
 };
 
-console.log(longestConsecutive([0, 3, 2, 5, 4, 6, 1, 1]));
+console.log(longestConsecutive([0]));
