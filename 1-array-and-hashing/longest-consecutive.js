@@ -21,12 +21,40 @@
  * -10^9 <= nums[i] <= 10^9
  */
 
-// 2, 1, 5, 4, 3
+// 20, 6, 31, 2, 1, 5, 4, 3
 // 3: <- 1, -> 2
 // given a starting number k belonging to nums, iterate nums and turn on flags[i] if k <= i < k + nums.length
 
 const longestConsecutive = (nums) => {
+  const hasPrev = {};
+
+  for (let num of nums) {
+    hasPrev[num + 1] = true;
+  }
+
+  let max = 0;
+  for (let num of nums) {
+    if (hasPrev[num]) {
+      continue;
+    }
+
+    let next = num + 1;
+    while (hasPrev[next]) {
+      next++;
+    }
+
+    const length = next - num - 1;
+    if (length > max) {
+      max = length;
+    }
+  }
+
+  return max;
+};
+
+const longestConsecutiveCuadTime = (nums) => {
   const flags = [...new Array(nums.length)].map(() => 0);
+
   let maxLength = 0;
   for (let start of nums) {
     for (let num of nums) {
@@ -51,4 +79,4 @@ const longestConsecutive = (nums) => {
   return maxLength;
 };
 
-console.log(longestConsecutive([0]));
+console.log(longestConsecutive([0,3,2,5,4,6,1,1]));
