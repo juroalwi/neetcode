@@ -39,11 +39,11 @@ const longestConsecutive = (nums) => {
     }
 
     let next = num + 1;
-    while (hasPrev[next]) {
+    while (hasPrev[next + 1]) {
       next++;
     }
 
-    const length = next - num - 1;
+    const length = next - num;
     if (length > max) {
       max = length;
     }
@@ -79,4 +79,4 @@ const longestConsecutiveCuadTime = (nums) => {
   return maxLength;
 };
 
-console.log(longestConsecutive([0,3,2,5,4,6,1,1]));
+console.log(longestConsecutive([0, 3, 2, 5, 4, 6, 1, 1]));
